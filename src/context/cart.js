@@ -6,6 +6,7 @@ const CartContext = createContext({
 });
 
 CartContext.displayName = "CartContext";
+
 function CartContextProvider({ children }) {
   const [cartDetail, setCartDetail] = useState({});
   return (
