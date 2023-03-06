@@ -1,6 +1,7 @@
 const APP_CONSTANTS = {
   APIS: {
-    BACKEND_BASE_URL: "https://ecom-server-assignment.vercel.app/api",
+    // BACKEND_BASE_URL: "https://ecom-server-assignment.vercel.app/api",
+    BACKEND_BASE_URL: "http://localhost:4000/api",
     ITEM_LIST: "/item/list",
     ADD_TO_CART: "/cart/add",
     ORDER: "/cart/:cartId/complete",

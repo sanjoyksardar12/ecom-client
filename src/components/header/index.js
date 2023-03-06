@@ -27,7 +27,8 @@ function Header() {
     const result = await fetcher.get(
       APP_CONSTANTS.APIS.ORDER.replace(":cartId", cartDetail.cartId)
     );
-
+    debugger;
+    console.log("result", result);
     setOrderDetail(result);
     addNotification(result.message || "order confirm!!");
 
