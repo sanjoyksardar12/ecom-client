@@ -1,5 +1,5 @@
 /* from w3school */
-#toast {
+.toast {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
@@ -19,11 +19,11 @@
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-  
-#toast.show {
-   
-}
 
+.toast.error{
+    color: rgb(239, 74, 74);
+}
+  
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}

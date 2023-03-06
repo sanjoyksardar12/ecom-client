@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import APP_CONSTANTS from "../../constant";
-import { useCartContext, useOrderContext } from "../../context";
+import {
+  useCartContext,
+  useNotificationContext,
+  useOrderContext,
+} from "../../context";
 import { setCookie } from "../../utils";
 import fetcher from "../../utils/fetrcher";
 import "./loginForm.css";
 
 function LoginForm() {
-  // const navigation = useNavigation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setCartDetail } = useCartContext();
   const { setOrderDetail } = useOrderContext();
-
-  // const [errorMessage, setErrorMessage] = useState("");
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { addNotification } = useNotificationContext();
 
   const updateUsetName = (event) => {
     setUsername(event.target.value);
@@ -27,18 +28,16 @@ function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    //clear cart and order
-    setCartDetail({});
-    setOrderDetail({});
-    setCookie("token", "");
-
-    const result = await fetcher.post(APP_CONSTANTS.API_ENDPOINTS.SIGNUP, {
+    const result = await fetcher.post(APP_CONSTANTS.APIS.LOGIN, {
       username: username,
       password: password,
     });
+
+    if (!result.success) {
+      addNotification(result.message || "Invalid username/password");
+      return;
+    }
     setCookie("token", result.token);
 
     navigate("listitem");

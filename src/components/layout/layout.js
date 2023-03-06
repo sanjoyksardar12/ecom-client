@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Toast from "../toast";
+import NotificationManager from "../notification-manager";
 import Header from "../header";
 import "./layout.css";
 
@@ -9,12 +9,11 @@ function Layout() {
     <div className="page-container">
       <Header />
       <div className="docContent">
-      <div className="page-content">
-      <Outlet />
+        <div className="page-content">
+          <Outlet />
+        </div>
       </div>
-        
-      </div>
-      <Toast />
+      <NotificationManager />
     </div>
   );
 }

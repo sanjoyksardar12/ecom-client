@@ -4,7 +4,7 @@ import APP_CONSTANTS from "../constant";
 // TODO: refacrtor
 class Fetcher {
   constructor(respInterceptors) {
-    this.baseUrl = APP_CONSTANTS.API_ENDPOINTS.BACKEND_BASE_URL;
+    this.baseUrl = APP_CONSTANTS.APIS.BACKEND_BASE_URL;
     this.options = {
       method: "GET",
       rediret: "follow",
@@ -30,7 +30,18 @@ class Fetcher {
     // const resp = await fetch(url, this.options);
     // const result = await resp.json();
     // handle error properly with status code
-    return fetch(this.baseUrl + url, this.options).then((resp) => resp.json());
+    return fetch(this.baseUrl + url, this.options)
+      .then((resp) => {
+        return resp.json();
+        // if (resp.ok) {
+        //   return resp.json();
+        // }
+        // return resp.text();
+      })
+      .catch((err) => {
+        debugger;
+        console.log("err", err);
+      });
   }
 
   get(url) {

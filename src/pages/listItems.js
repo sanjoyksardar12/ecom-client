@@ -12,7 +12,7 @@ function ListItemPage() {
 
   useEffect(() => {
     const getItems = async () => {
-      const result = await fetcher.get(APP_CONSTANTS.API_ENDPOINTS.ITEM_LIST);
+      const result = await fetcher.get(APP_CONSTANTS.APIS.ITEM_LIST);
       setItems(result.items);
     };
     getItems();
@@ -20,12 +20,9 @@ function ListItemPage() {
 
   const addItemToCart = (itemId) => {
     const addToCart = async () => {
-      const result = await fetcher.post(
-        APP_CONSTANTS.API_ENDPOINTS.ADD_TO_CART,
-        {
-          items: [itemId],
-        }
-      );
+      const result = await fetcher.post(APP_CONSTANTS.APIS.ADD_TO_CART, {
+        items: [itemId],
+      });
       setCartDetail({ items: result.items, cartId: result.cartId });
     };
     addToCart();

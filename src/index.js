@@ -4,8 +4,6 @@ import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import { Provider } from "react-redux";
-import store from "./store/store";
 import AppContextProvider from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -13,9 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AppContextProvider>
-      <Provider store={store}>
-        <RouterProvider router={router}></RouterProvider>
-      </Provider>
+      <RouterProvider router={router}></RouterProvider>
     </AppContextProvider>
   </React.StrictMode>
 );
