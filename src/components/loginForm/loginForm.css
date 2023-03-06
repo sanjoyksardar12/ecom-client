@@ -1,0 +1,52 @@
+.login-form-container{
+    margin-top: 50px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+}
+
+.login-form{
+
+}
+
+.title{
+    color: #667085;
+}
+
+.input-container{
+    padding: 8px;
+}
+
+.label{
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px;
+}
+
+input{
+    background: #fff;
+    border: 1px solid #e4e7ec;
+    padding: 4px;
+    font-size: 16px;
+
+}
+input[type="text"]
+{
+    background: transparent;
+}
+
+input:-internal-autofill-selected{
+    background-color: #fff;
+}
+
+.submit-button{
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+
+
+
+
+
+

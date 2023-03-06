@@ -1,0 +1,73 @@
+:root{
+    --divider-color: #e4e7ec;
+    --link-color: #4b32c3;
+}
+
+.siteHeader{
+    border-block-end: 1px solid var(--divider-color);
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.docContent{
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.header-content{
+    width: 100%;
+    display: flex;
+    padding: 12px 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.logo-link{
+    display: inline-flex;
+    flex: none;
+    grid-column: 1/-1;
+    grid-row: 1;
+    justify-self: start;
+    padding: 0.5rem 0;
+    place-content: center;
+    z-index: 2;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 20px;
+    color: #101828;
+}
+
+.siteNav{
+    display: flex;
+    flex-direction: row;
+    grid-column: auto;
+}
+
+.navPanel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.nav-list  {
+    display: flex;
+    font-size: var(--step-0);
+    gap: 32px;
+    list-style-type: none;
+}
+.nav-list li{
+    margin: 0 0 0 12px;
+    cursor: pointer;
+}
+.nav-list li button, .nav-list li a {
+    background: none;
+    border: none;
+    text-decoration: none;
+    transition: color .2s linear;
+    font-size: 20px;
+    color: #98a2b3;
+    cursor: pointer;
+}
+.nav-list li button:hover, .nav-list li button:active,
+.nav-list li a:hover, .nav-list li a:active{
+    color: #4b32c3;
+}

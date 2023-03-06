@@ -1,0 +1,19 @@
+.items{
+    width: 100%;
+    display: grid;
+    grid-gap: 20px;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}
+
+.item{
+    display: inline-block;
+    border:  1px solid #e4e7ec;
+    border-radius: 4px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.item.selected{
+    background-color: #eeeeee;
+}
