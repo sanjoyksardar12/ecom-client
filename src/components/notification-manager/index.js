@@ -8,7 +8,6 @@ function NotificationManager() {
   if (!notifications.length) {
     return null;
   }
-  console.log("notification manager");
   const notification = notifications[0];
   return <Toast {...notification} />;
 }

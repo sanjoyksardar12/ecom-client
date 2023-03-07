@@ -33,14 +33,10 @@ class Fetcher {
     // handle error properly with status code
     return fetch(this.baseUrl + url, this.options)
       .then((resp) => {
+        this.respInterceptors.forEach(inter=>inter(resp))
         return resp.json();
-        // if (resp.ok) {
-        //   return resp.json();
-        // }
-        // return resp.text();
       })
       .catch((err) => {
-        debugger;
         console.log("err", err);
       });
   }

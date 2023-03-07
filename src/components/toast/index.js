@@ -16,7 +16,6 @@ const Toast = ({ message, id, type=NOTIFICATION_TYPES.INFO }) => {
   }, [id, removeNotification]);
   const typeClass =
     type === NOTIFICATION_TYPES.INFO ? "info" : "error";
-  console.log("meddage", message);
   return <div className={`toast ${typeClass}`}>{message}</div>;
 };
 
