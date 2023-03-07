@@ -1,10 +1,11 @@
 import { getCookie } from ".";
 import APP_CONSTANTS from "../constant";
 
+const { APIS} = APP_CONSTANTS;
 // TODO: refacrtor
 class Fetcher {
   constructor(respInterceptors) {
-    this.baseUrl = APP_CONSTANTS.APIS.BACKEND_BASE_URL;
+    this.baseUrl = APIS.BACKEND_BASE_URL;
     this.options = {
       method: "GET",
       rediret: "follow",

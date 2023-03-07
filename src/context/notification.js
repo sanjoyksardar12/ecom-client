@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import APP_CONSTANTS from "../constant";
 
+const { NOTIFICATION_TYPES } = APP_CONSTANTS;
+
 const NotificationContext = createContext({
   orderIds: [],
   setOrderIds: () => {},
@@ -12,7 +14,7 @@ function NotificationContextProvider({ children }) {
 
   const addNotification = (
     notification,
-    type = APP_CONSTANTS.NOTIFICATION_TYPES.INFO
+    type = NOTIFICATION_TYPES.INFO
   ) => {
     setNotifications([
       ...notifications,

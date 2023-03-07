@@ -5,14 +5,16 @@ import { useCartContext } from "../context/cart";
 import { useItemsContext } from "../context/items";
 import fetcher from "../utils/fetrcher";
 
+const { APIS} = APP_CONSTANTS
+
 function ListItemPage() {
-  const { setItems } = useItemsContext();
+  const { setItems } = useItemsContext()
   const { setCartDetail } = useCartContext();
   const { items: cartItems } = useCartContext().cartDetail || {};
 
   useEffect(() => {
     const getItems = async () => {
-      const result = await fetcher.get(APP_CONSTANTS.APIS.ITEM_LIST);
+      const result = await fetcher.get(APIS.ITEM_LIST);
       setItems(result.items);
     };
     getItems();

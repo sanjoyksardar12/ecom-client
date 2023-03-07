@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import APP_CONSTANTS from "../../constant";
+import  APP_CONSTANTS from "../../constant";
 import {
-  useCartContext,
   useNotificationContext,
-  useOrderContext,
 } from "../../context";
 import { setCookie } from "../../utils";
 import fetcher from "../../utils/fetrcher";
 import "./loginForm.css";
 
+const { NOTIFICATION_TYPES, APIS} = APP_CONSTANTS;
+
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setCartDetail } = useCartContext();
-  const { setOrderDetail } = useOrderContext();
   const { addNotification } = useNotificationContext();
 
   const updateUsetName = (event) => {
@@ -26,16 +24,25 @@ function LoginForm() {
     setPassword(event.target.value);
   };
 
+  const validate = ()=>{
+    if(!username || username.length<6 || !password || password.length<6){ 
+      addNotification("Minimum length of Username and Password is 6 !" , NOTIFICATION_TYPES.ERROR)
+      return false
+    }
+    return true
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if(!validate()){
+      return
+    }
 
-    const result = await fetcher.post(APP_CONSTANTS.APIS.LOGIN, {
+    const result = await fetcher.post(APIS.LOGIN, {
       username: username,
       password: password,
     });
-
     if (!result.success) {
-      addNotification(result.message || "Invalid username/password");
+      addNotification(result.message || "Invalid username/password", NOTIFICATION_TYPES.ERROR);
       return;
     }
     setCookie("token", result.token);

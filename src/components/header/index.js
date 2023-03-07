@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getCookie } from "../../utils";
 import "./header.css";
 import {
   useCartContext,
@@ -10,25 +9,47 @@ import {
 } from "../../context";
 import APP_CONSTANTS from "../../constant";
 import fetcher from "../../utils/fetrcher";
+import { isAuthenticated } from "../../utils/authentication";
+
+const { NOTIFICATION_TYPES, APIS} = APP_CONSTANTS;
 
 function Header() {
   const navigate = useNavigate();
-  const { cartDetail } = useCartContext();
+  const { cartDetail, setCartDetail } = useCartContext();
   const { setOrderDetail } = useOrderContext();
   const { setOrderIds } = useOrderHistoryContext();
   const { addNotification } = useNotificationContext();
+
   const showCartDetail = () => {
+    if(!isAuthenticated()){
+      addNotification("Please login for detail view!!", NOTIFICATION_TYPES.ERROR)
+      navigate("/")
+      return
+    }
+    if(!cartDetail?.items?.length){
+      addNotification("No items in the cart!", NOTIFICATION_TYPES.ERROR)
+      return
+    }
     const cartIds = [...cartDetail?.items].join(",");
     const message = `Cart Id: ${cartDetail.cartId},  Item Ids: ${cartIds}`; // move this string
     addNotification(message);
   };
 
   const makeOrder = async () => {
+    if(!isAuthenticated()){
+      addNotification("Please login for detail view!!", NOTIFICATION_TYPES.ERROR)
+      navigate("/")
+      return
+    }
+    if(!cartDetail.cartId){
+      addNotification("Add Items to cart!", NOTIFICATION_TYPES.ERROR)
+      navigate("listitem")
+      return
+    }
     const result = await fetcher.get(
-      APP_CONSTANTS.APIS.ORDER.replace(":cartId", cartDetail.cartId)
+      APIS.ORDER.replace(":cartId", cartDetail.cartId)
     );
-    debugger;
-    console.log("result", result);
+    setCartDetail({})
     setOrderDetail(result);
     addNotification(result.message || "order confirm!!");
 
@@ -36,13 +57,16 @@ function Header() {
   };
 
   const showOrderHistory = async () => {
-    const result = await fetcher.get(APP_CONSTANTS.APIS.ORDER_HISTORY);
+    if(!isAuthenticated()){
+      addNotification("Please login for detail view!!", NOTIFICATION_TYPES.ERROR)
+      navigate("/")
+      return
+    }
+    const result = await fetcher.get(APIS.ORDER_HISTORY);
     addNotification(`Order Ids=${result.orderIds.join(",")}`);
     setOrderIds(result.orderIds);
   };
 
-  //considering if token present , that means user loggedin
-  const token = getCookie("token");
   return (
     <header className="siteHeader">
       <div className="docContent">
@@ -50,7 +74,6 @@ function Header() {
           <Link to="/" className="logo-link">
             Home
           </Link>
-          {token && (
             <nav className="siteNav">
               <div className="navPanel">
                 <ul className="nav-list">
@@ -68,7 +91,6 @@ function Header() {
                 </ul>
               </div>
             </nav>
-          )}
         </div>
       </div>
     </header>
