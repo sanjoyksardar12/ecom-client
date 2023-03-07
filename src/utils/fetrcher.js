@@ -58,7 +58,7 @@ const addTokenToCookie = (res) => {
   );
 };
 
-const fetcher = new Fetcher([addTokenToCookie]);
+const fetcher = new Fetcher([]);
 export default fetcher;
 
 // fetch("http://localhost:3000/item/list", {

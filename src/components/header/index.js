@@ -63,6 +63,10 @@ function Header() {
       return
     }
     const result = await fetcher.get(APIS.ORDER_HISTORY);
+    if(!result?.orderIds?.length){
+      addNotification(`Order list is empty!`, NOTIFICATION_TYPES.ERROR);
+      return
+    }
     addNotification(`Order Ids=${result.orderIds.join(",")}`);
     setOrderIds(result.orderIds);
   };
