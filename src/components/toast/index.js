@@ -10,7 +10,7 @@ const Toast = ({ message, id, type=NOTIFICATION_TYPES.INFO }) => {
   useEffect(() => {
     let timer = setTimeout(() => {
       removeNotification(id);
-    }, 2002220);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [id, removeNotification]);
